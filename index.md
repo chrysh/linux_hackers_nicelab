@@ -1,37 +1,16 @@
-## Welcome to GitHub Pages
+# Linux Hackers Nicelab Blog
 
-You can use the [editor on GitHub](https://github.com/chrysh/linux_hackers_nicelab/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+## Getting Started with OP-TEE
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The [documentation on how to get started with OP-TEE](https://optee.readthedocs.io/) is actually abundant and and well written, once you know what to search for.
+Find [here the instructions what to compile for Raspberry Pi 3](https://optee.readthedocs.io/en/latest/building/devices/rpi3.html).
 
-### Markdown
+In order to boot a RaspberryPi 3 with OP-TEE, you need to compile five things:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* A bootloader supporting OP-TEE (see [https://optee.readthedocs.io/en/latest/building/gits/build.html#build])
+* An [Linux OS](https://optee.readthedocs.io/en/latest/building/gits/optee_os.html) containing an OP-TEE kernel module
+* A rootfs containing a ta-supplicant, which can be compiled with [OP-TEE client program](https://optee.readthedocs.io/en/latest/building/gits/optee_client.html) running in the insecure world, which connects the user application with the trusted world. The client provides the libraries to compile the host program
+* An [OP-TEE host program](https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html) running the insecure world and communication with the TA over the OP-TEE API
+* An [OP-TEE Trusted Application (TA)](https://github.com/linaro-swg/optee_examples) running in the secure world
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/chrysh/linux_hackers_nicelab/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+You can also find the [hello world examples repository on GitHub](https://github.com/linaro-swg/optee_examples) with TA (Trusted Application) and host program. The TAs have to be copied to `/lib/optee_armtz` in the devices rootfs.
